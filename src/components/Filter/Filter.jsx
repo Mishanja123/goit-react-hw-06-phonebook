@@ -1,28 +1,34 @@
-import PropTypes from "prop-types";
+import { useDispatch } from 'react-redux';
+
+import { setFilter } from '../../features/filterSlice'
+
+
 import css  from "./Filter.module.css";
 
-export const Filter = ({filter, handleChange, inputRef}) => {
+
+export const Filter = () => {
+  const dispatch = useDispatch() 
+
+  const handleFilterChange = (event) => {
+    const filters = event.target.value
+
+    console.log(filters);
+    dispatch(setFilter(filters));
+  };
+
     return (
         <form className={css.form}>
-        <label htmlFor="filter" className= {css.lable}>
+        <label className= {css.lable}>
           Find contacts by name
         <input
-        className={css.input}
-          type="text"
-          name="filter"
-          ref={inputRef}
-          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          onChange={handleChange}
-          value={filter}
-          placeholder="Enter contact Name"
+         className={css.input}
+         type="text"
+         name="filter"
+         pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+         placeholder="Enter contact Name"
+         onChange={handleFilterChange}
         />
       </label>
       </form>
-  )
-}
-
-Filter.propTypes = {
-  inputRef: PropTypes.object.isRequired,
-  filter: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired
-}
+  );
+};

@@ -1,18 +1,22 @@
-import { nanoid } from 'nanoid'
-import PropTypes from "prop-types";
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../features/contactsSlice'
 
 import css  from "./ContactsForm.module.css";
 
 
-export const ContactsForm = ({addContact}) => {
+export const ContactsForm = () => {
 
- const onFormSubmit = (event) => {
+  const dispatch = useDispatch() 
+
+  const onFormSubmit = (event) => {
     event.preventDefault();
-    const contactName = event.currentTarget.elements.name.value
-    const contactNumber = event.currentTarget.elements.number.value
-    const contactId = nanoid()
-    addContact(contactName, contactNumber, contactId)
-    event.currentTarget.reset()
+
+    const form = event.target
+    const name = event.target.elements.name.value;
+    const number = event.target.elements.number.value;
+    dispatch(addContact(name, number));
+   
+    form.reset()
   }
 
 
@@ -45,8 +49,4 @@ export const ContactsForm = ({addContact}) => {
         <button type="submit" className={css.btn} >Add contact</button>
     </form>
   )
-}
-
-ContactsForm.propTypes = {
-  addContact: PropTypes.func.isRequired
 }
