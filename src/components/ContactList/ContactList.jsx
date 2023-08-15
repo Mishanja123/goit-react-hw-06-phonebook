@@ -10,16 +10,9 @@ import css  from "./ContactList.module.css";
 
 
 
-const getVisibleContacts = ({contacts}, filter) => {
-      return contacts.filter((contact) => contact.name.toLowerCase().includes(filter.toLowerCase()))
-      // switch (filter) {
-      //       case statusFilters.active:
-      //         return tasks.filter(task => !task.completed);
-      //       case statusFilters.completed:
-      //         return tasks.filter(task => task.completed);
-      //       default:
-      //         return tasks;
-      //     }
+const getVisibleContacts = (contacts, filter) => {
+  return contacts.filter(contact => contact.name.toLowerCase().includes(filter.value.toLowerCase()))
+  
 }
 // const getVisibleTasks = (tasks, statusFilter) => {
 //   switch (statusFilter) {
@@ -38,9 +31,11 @@ const getVisibleContacts = ({contacts}, filter) => {
 
 export const ContactList = () => {
 
-  const filter = useSelector(getFilter);
   const contacts = useSelector(getContacts);
-  const visibleContacts = getVisibleContacts({contacts}, filter);
+  console.log("test", contacts);
+  const filter = useSelector(getFilter);
+  console.log("test",filter)
+  const visibleContacts = getVisibleContacts(contacts, filter);
 
   return (
     <>
