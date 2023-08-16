@@ -13,7 +13,6 @@ export const Filter = () => {
 
   const handleFilterChange = (event) => {
     const filterValue = event.target.value
-    console.log(filterValue);
     dispatch(setFilter(filterValue));
   };
 
