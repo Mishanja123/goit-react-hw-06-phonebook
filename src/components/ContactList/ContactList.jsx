@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { getContacts } from "../../features/selectors";
-import { getFilter } from "../../features/selectors";
+import { getContacts } from "../../redux/selectors";
+import { getFilter } from "../../redux/selectors";
 
 
 import { Filter } from "../Filter/Filter";
